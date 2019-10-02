@@ -11,11 +11,11 @@ const server = express()
 const port = 2000
 
 const shema = Joi.object({
-	titulo: Joi.string(),
-	descripcion: Joi.string(),
-	estreno: Joi.number().integer(),
-	poster: Joi.string(),
-	trailer: Joi.string()
+	titulo: Joi.string().alphanum().min(3).max(50).required(),
+	descripcion: Joi.string().max(280).required(),
+	estreno: Joi.number().integer().min(1895).max((new Date().getFullYear())),
+	poster: Joi.string().uri(),
+	trailer: Joi.string().uri()
 })
 
 let peliculas = null
@@ -60,12 +60,22 @@ server.get('/api/:id', (req, res) => {
 server.post('/api', (req, res) => {
 	
 	let pelicula = req.body
-	console.log(pelicula);
+	// console.log(pelicula);
 	
-	let rta = shema.validate(pelicula)
+	let rta = shema.validate(pelicula, {abortEarly: false})
 
 	if (rta.error) {
-		res.json({'rta': rta.error.details[0].message})
+
+		let errores = rta.error.details.map((error) => {
+			// console.log(error.path)
+			let msg = new Object()
+
+			msg[error.path[0]] = error.message
+
+			return msg
+		})
+
+		res.json({'errors': errores})
 	} else {
 		peliculas.insert(pelicula)
 		res.json({'rta': 'ok'})
