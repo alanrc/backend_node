@@ -1,0 +1,24 @@
+<a href="/panel/nueva" class="btn btn-success float-right btn-sm rounded-0 mb-1">Nuevo <i class="fas fa-plus"></i></a>
+<table class="table table-bordered text-center">
+	<thead class="thead-dark">
+		<tr>
+			<th>ID</th>
+			<th>TITULO</th>
+			<th>ESTRENO</th>
+			<th>ACCIONES</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each film}}
+			<tr>
+				<th scope="1">{{this.$loki}}</th>
+				<td>{{this.titulo}}</td>
+				<td>{{this.estreno}}</td>
+				<td>
+					<a href="/panel/actualizar/{{this.$loki}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+					<a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+				</td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>

@@ -4,40 +4,45 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Formulario</title>
+	<title>{{{ title }}}</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-----   Font awesome   ------>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 
 	<div class="container p-5">
 		<div class="row">
-			<div class="col-md-4 offset-md-4">
+			<div class="col-md-8 offset-md-2">
 				<div class="card animated zoomIn">
 					<div class="card-header bg-dark text-white text-center">
-						<h3>Nerdflix Generator</h3>
+						<h3>{{{ title }}}</h3>
 					</div>
 					<div class="card-body">
-						<form action="http://127.0.0.1:2000/api" method="post">
-							<div class="form-group">
-								<input type="text" class="form-control" name="titulo" placeholder="Titulo">
-							</div>
-							<div class="form-group">
-								<input type="number" class="form-control" name="estreno" placeholder="Estreno">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" name="trailer" placeholder="http://posters.com">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" name="poster" placeholder="http://images.com">
-							</div>
-							<div class="form-group">
-								<textarea class="form-control" name="descripcion" cols="30" rows="10"
-									placeholder="Descripcion"></textarea>
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary btn-block">Enviar</button>
-							</div>
-						</form>
+						{{{ body }}}
+						<!-- <button class="btn btn-success float-right btn-sm border-none">Nuevo + </button>
+						<table class="table table-bordered text-center">
+							<thead class="thead-dark">
+								<tr>
+									<th>ID</th>
+									<th>TITULO</th>
+									<th>ESTRENO</th>
+									<th>ACCIONES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="1">1</th>
+									<td>Mark</td>
+									<td>klsklsk</td>
+									<td>
+										<button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+										<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table> -->
 					</div>
 				</div>
 			</div>

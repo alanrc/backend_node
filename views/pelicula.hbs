@@ -1,0 +1,20 @@
+<form action="http://127.0.0.1:2000/api" method="post">
+	<div class="form-group">
+		<input  value="{{film.titulo}}" type="text" class="form-control" name="titulo" placeholder="Titulo">
+	</div>
+	<div class="form-group">
+		<input value="{{film.estreno}}" type="number" class="form-control" name="estreno" placeholder="Estreno">
+	</div>
+	<div class="form-group">
+		<input value="{{film.trailer}}" type="text" class="form-control" name="trailer" placeholder="http://posters.com">
+	</div>
+	<div class="form-group">
+		<input value="{{film.poster}}" type="text" class="form-control" name="poster" placeholder="http://images.com">
+	</div>
+	<div class="form-group">
+		<textarea  class="form-control" name="descripcion" cols="" rows="" placeholder="Descripcion">{{film.descripcion}}</textarea>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary btn-block">Enviar</button>
+	</div>
+</form>

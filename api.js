@@ -1,17 +1,19 @@
 /* -----   Modulos   ----- */
+
 const  express = require('express')
 const bodyParser = require('body-parser')
 const lokijs = require('lokijs')
 const Joi = require('@hapi/joi')
-
+const hb = require('express-handlebars')
 
 
 /* -----   Auxiliares   ----- */
+
 const server = express()
 const port = 2000
 
 const shema = Joi.object({
-	titulo: Joi.string().alphanum().min(3).max(50).required(),
+	titulo: Joi.string().min(3).max(50).required(),
 	descripcion: Joi.string().max(280).required(),
 	estreno: Joi.number().integer().min(1895).max((new Date().getFullYear())),
 	poster: Joi.string().uri(),
@@ -31,15 +33,40 @@ const db = new lokijs('nerdflix.json', {
 })
 
 /* -----   Configuraciones   ----- */
+
 server.listen(port)
 // console.log('Server on port: ', port)
 server.use(bodyParser.urlencoded({extended: false}))
 server.use(bodyParser.json())
 server.use(express.static('./public'))
 
+server.engine('.hbs', hb({extname: '.hbs', defaultLayout: 'main'}))
+
+server.set('view engine', '.hbs')
+
 server.set('json spaces', 4)
 
+
 /* -----   Procesos   ----- */
+
+server.get('/panel', (req, res) => {
+	res.render('panel', {
+		title: 'Nerdflix Generator',
+		film: peliculas.data
+	})
+})
+
+server.get('/panel/nueva', (req, res) => {
+	res.render('pelicula', {title: 'Nueva Pelicula'})
+})
+
+server.get('/panel/actualizar/:id', (req, res) => {
+	let elID = req.params.id
+	res.render('pelicula', {
+		title: 'Actulizar Pelicula',
+		film: peliculas.get(elID)
+	})
+})
 
 
 server.get('/api', (req, res) => {
@@ -57,6 +84,7 @@ server.get('/api/:id', (req, res) => {
 })
 
 // Crear una nueva pelicula...
+
 server.post('/api', (req, res) => {
 	
 	let pelicula = req.body
@@ -83,6 +111,7 @@ server.post('/api', (req, res) => {
 })
 
 // Actulizar una nueva pelicula por ID
+
 server.put('/api/:id', (req, res) => {
 	let elID = req.params.id
 	let laPelicula = peliculas.get(elID)
@@ -101,6 +130,7 @@ server.put('/api/:id', (req, res) => {
 })
 
 // Borrar una pelicula por ID
+
 server.delete('/api/:id', (req, res) => {
 	let elID = req.params.id
 	let laPelicula = peliculas.get(elID)
